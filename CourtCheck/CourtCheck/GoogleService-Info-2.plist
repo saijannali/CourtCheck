@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>613732976778-bv3psrto8ul0qp903247ic85klh7oage.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.613732976778-bv3psrto8ul0qp903247ic85klh7oage</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDZ29DmlVG31OpqK43gKLbmy1ACiezQYsI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>613732976778</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.CC.CourtCheck</string>
+	<key>PROJECT_ID</key>
+	<string>courtcheck-71801</string>
+	<key>STORAGE_BUCKET</key>
+	<string>courtcheck-71801.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:613732976778:ios:c41d0c8cdd68ed33e04573</string>
+</dict>
+</plist>
