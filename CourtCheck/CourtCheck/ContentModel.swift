@@ -40,5 +40,6 @@ class ContentModel: ObservableObject{
     
     func checkIn(playerAmt : Int) {
         // check in # of players
+        print("Checkin")
     }
 }

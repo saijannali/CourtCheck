@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  LocationDetailsView.swift
 //  CourtCheck
 //
 //  Created by Sai Jannali on 7/10/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct LocationView: View {
     @ObservedObject var contentModel = ContentModel()
     
     var body: some View {
@@ -18,8 +18,9 @@ struct ContentView: View {
                         Image(systemName: "photo")
                         Text(location.id)
                         Text("Players: \(location.curr_players)")
-                        NavigationLink("", destination: LocationDetailsView(contentModel: contentModel))
-                    }.background(backgroundColor(activePlayers: location.curr_players))
+                        NavigationLink("", destination: LocationDetailsView()
+                    )}
+                    .background(backgroundColor(activePlayers: location.curr_players))
                     Text("Check IN here")
                 }
             }
@@ -46,3 +47,21 @@ struct ContentView: View {
     }
 }
 
+struct LocationDetailsView: View{
+    var body: some View{
+        Text("")
+    }
+}
+
+//
+//struct LocationDetailsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LocationDetailsView()
+//    }
+//}
+
+struct Previews_LocationView_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
+}
