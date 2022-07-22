@@ -10,24 +10,30 @@
 		E5031962287B5BC90083592A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E5031961287B5BC90083592A /* FirebaseAuth */; };
 		E5031964287B5BC90083592A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E5031963287B5BC90083592A /* FirebaseFirestore */; };
 		E5031966287B5BC90083592A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E5031965287B5BC90083592A /* FirebaseStorage */; };
-		E503196A287B631E0083592A /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5031969287B631E0083592A /* ContentModel.swift */; };
+		E503196A287B631E0083592A /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5031969287B631E0083592A /* LocationModel.swift */; };
+		E52F95282881FDC000E1C8D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F95272881FDC000E1C8D1 /* ContentView.swift */; };
+		E52F952B2881FEC600E1C8D1 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F952A2881FEC600E1C8D1 /* MainViewModel.swift */; };
+		E52F952D2882044600E1C8D1 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F952C2882044600E1C8D1 /* UserView.swift */; };
+		E52F952F2882088B00E1C8D1 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F952E2882088B00E1C8D1 /* ProfileView.swift */; };
 		E549A44A287FD5660089D798 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E549A449287FD5660089D798 /* LoginView.swift */; };
 		E574B1C4287B544200D442C1 /* CourtCheckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574B1C3287B544200D442C1 /* CourtCheckApp.swift */; };
 		E574B1C8287B544300D442C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E574B1C7287B544300D442C1 /* Assets.xcassets */; };
 		E574B1CB287B544300D442C1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E574B1CA287B544300D442C1 /* Preview Assets.xcassets */; };
-		E5822071287F4AA400A891B1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5822070287F4AA400A891B1 /* FirebaseManager.swift */; };
 		E595F404287B6FCA00101A65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E595F403287B6FCA00101A65 /* GoogleService-Info.plist */; };
 		E595F406287B729000101A65 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595F405287B729000101A65 /* LocationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E5031969287B631E0083592A /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
+		E5031969287B631E0083592A /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		E52F95272881FDC000E1C8D1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E52F952A2881FEC600E1C8D1 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		E52F952C2882044600E1C8D1 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		E52F952E2882088B00E1C8D1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		E549A449287FD5660089D798 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E574B1C0287B544200D442C1 /* CourtCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CourtCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E574B1C3287B544200D442C1 /* CourtCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCheckApp.swift; sourceTree = "<group>"; };
 		E574B1C7287B544300D442C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E574B1CA287B544300D442C1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		E5822070287F4AA400A891B1 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		E595F403287B6FCA00101A65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E595F405287B729000101A65 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,6 +52,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E5524FB42884994600580A60 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E52F952E2882088B00E1C8D1 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		E574B1B7287B544200D442C1 = {
 			isa = PBXGroup;
 			children = (
@@ -66,9 +80,11 @@
 			isa = PBXGroup;
 			children = (
 				E574B1C3287B544200D442C1 /* CourtCheckApp.swift */,
-				E5822070287F4AA400A891B1 /* FirebaseManager.swift */,
-				E595F405287B729000101A65 /* LocationView.swift */,
-				E5031969287B631E0083592A /* ContentModel.swift */,
+				E52F95272881FDC000E1C8D1 /* ContentView.swift */,
+				E52F952C2882044600E1C8D1 /* UserView.swift */,
+				E52F952A2881FEC600E1C8D1 /* MainViewModel.swift */,
+				E59625AC288364A50090AF9C /* Location */,
+				E5524FB42884994600580A60 /* Profile */,
 				E549A449287FD5660089D798 /* LoginView.swift */,
 				E595F403287B6FCA00101A65 /* GoogleService-Info.plist */,
 				E574B1C7287B544300D442C1 /* Assets.xcassets */,
@@ -83,6 +99,15 @@
 				E574B1CA287B544300D442C1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E59625AC288364A50090AF9C /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				E595F405287B729000101A65 /* LocationView.swift */,
+				E5031969287B631E0083592A /* LocationModel.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,11 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5822071287F4AA400A891B1 /* FirebaseManager.swift in Sources */,
+				E52F952B2881FEC600E1C8D1 /* MainViewModel.swift in Sources */,
+				E52F952F2882088B00E1C8D1 /* ProfileView.swift in Sources */,
 				E574B1C4287B544200D442C1 /* CourtCheckApp.swift in Sources */,
+				E52F952D2882044600E1C8D1 /* UserView.swift in Sources */,
+				E52F95282881FDC000E1C8D1 /* ContentView.swift in Sources */,
 				E595F406287B729000101A65 /* LocationView.swift in Sources */,
 				E549A44A287FD5660089D798 /* LoginView.swift in Sources */,
-				E503196A287B631E0083592A /* ContentModel.swift in Sources */,
+				E503196A287B631E0083592A /* LocationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,30 +7,18 @@
 
 import SwiftUI
 import Firebase
-class FirebaseManager: NSObject {
-    
-    let auth: Auth
-    
-    static let shared = FirebaseManager()
-    
-    override init() {
-        FirebaseApp.configure()
-        
-        self.auth = Auth.auth()
-        
-        super.init()
-    }
-}
+
 struct LoginView: View {
+    @EnvironmentObject var mainViewModel : MainViewModel
     
-    @State var isLoginMode = false
+    @State var isLoginMode = true
     @State var email = ""
     @State var password = ""
+    let didCompleteLogin: () -> ()
     
     var body: some View{
         NavigationView{
             ScrollView{
-                
                 VStack(spacing: 16){
                     Picker(selection: $isLoginMode, label: Text("Picker here")) {
                         Text("Login")
@@ -102,8 +90,24 @@ struct LoginView: View {
                 self.loginStatusMessage = "Failed to create new user: \(err)"
                 return
             }
+            
+            self.loginStatusMessage = "Successfully registered: \(result?.user.uid ?? "")"
             print("Sucessfully created user: \(result?.user.uid ?? "")")
+            
+            self.addUserDoc(userAuth: (result)!)
+            self.isLoginMode = true
         }
+    }
+    
+    private func addUserDoc(userAuth : AuthDataResult) {
+        let db = Firestore.firestore()
+
+        db.collection("Users").document(userAuth.user.uid)
+            .setData([
+                "uid" : userAuth.user.uid ?? "",
+                "email" : userAuth.user.email ?? "",
+                "checkedInPlayers" : 0,
+                "isCheckedIn" : false])
     }
     
     private func loginUser() {
@@ -113,12 +117,9 @@ struct LoginView: View {
                 return
             }
             print("Sucessfully logged in as user: \(result?.user.uid ?? "")")
+            self.didCompleteLogin()
         }
     }
-}
-struct ContentView_Previews: PreviewProvider{
-    static var previews: some View{
-        LoginView()
-    }
+    
 }
 

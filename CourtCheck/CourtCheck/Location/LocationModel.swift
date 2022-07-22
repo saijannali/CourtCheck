@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import SwiftUI
 
 struct Location: Identifiable{
     var id: String
@@ -15,7 +16,9 @@ struct Location: Identifiable{
     var curr_players: Int
     let rimType: String
 }
-class ContentModel: ObservableObject{
+
+class LocationModel: ObservableObject{
+    @EnvironmentObject var mainViewModel : MainViewModel
     @Published var Locations = [Location]()
     @Published var currLocation : Location?
     
@@ -34,12 +37,26 @@ class ContentModel: ObservableObject{
             } else{
                 print("Error getLocations()")
             }
-            
         }
     }
-    
-    func checkIn(playerAmt : Int) {
-        // check in # of players
-        print("Checkin")
+    /* check in # of players */
+    func checkInLocation(playerAmt : Int) {
+        //check for existing value in 'currLocation'
+        guard (currLocation?.id) != nil else{
+            print("Location Not Found")
+            return
+        }
+        // Update in 'playerAmt' in at 'currLocation' in Firebase
+        let totalPlayersNow = currLocation!.curr_players + playerAmt
+        self.db.collection("Locations").document(currLocation!.id)
+            .updateData([
+                "players" : totalPlayersNow]) { err in
+                    if let err = err{
+                        print("ERROR: checkInLocation couldn't : \(err)")
+                    } else{
+                        print("CheckInLocation Completed : \(playerAmt) Players added")
+                    }
+                }
     }
+    
 }

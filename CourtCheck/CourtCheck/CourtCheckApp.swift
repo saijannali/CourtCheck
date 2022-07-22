@@ -9,10 +9,11 @@ import SwiftUI
 
 @main
 struct CourtCheckApp: App {
-
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            let mainViewModel = MainViewModel()
+            ContentView()
+                .environmentObject(mainViewModel)
         }
     }
 }
