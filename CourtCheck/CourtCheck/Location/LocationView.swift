@@ -9,29 +9,30 @@ import SwiftUI
 import Combine
 
 struct LocationView: View {
+    @EnvironmentObject var mainViewModel : MainViewModel
     @ObservedObject var locationModel = LocationModel()
     
     var body: some View {
         NavigationView{
-            VStack{
-                List (locationModel.Locations) { location in
+            List{
+                ForEach(locationModel.Locations) { location in
                     HStack{
                         Image(systemName: "photo")
                         Text(location.id)
                         Text("Players: \(location.curr_players)")
-                        NavigationLink("", destination: LocationDetailsView(locationModel: locationModel)).onAppear {
-                            locationModel.currLocation = location
-                            }
+
+                        NavigationLink("Details", destination: LocationDetailsView(locationModel: locationModel, location: location))
                     }
                         .background(backgroundColor(activePlayers: location.curr_players))
-                    Text("Check In")
                 }
             }
+
         }
         .navigationTitle("Locations")
         .onAppear{
             self.locationModel.getLocations()
         }
+        .environmentObject(mainViewModel)
     }
     
     private func backgroundColor(activePlayers: Int) -> Color {
@@ -51,34 +52,54 @@ struct LocationView: View {
 }
 
 struct LocationDetailsView: View{
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject var locationModel : LocationModel
-    
-    @State var numberOfPlayers = ""
+    @State var location : Location?
+    @State var numberOfPlayers: Int = 0
+    @State var showingConfirmation = false
 
     var body: some View{
-
         VStack {
             // check if user is checkedIn
             if let isCheckedIn = mainViewModel.mainUser?.isCheckedIn{
                 if isCheckedIn{
-                    Text("You are already checked in at a location")
+                    VStack{
+                        Text("You are already checked in at a location")
+                        // if currView is same as the one user is checkedIn, provide checkout button
+                        if mainViewModel.mainUser!.checkInLocation == location!.id{
+                            Button {
+                                mainViewModel.checkOut()
+                                locationModel.checkOutAtLocation(decrementPlayer: numberOfPlayers,location: location!)
+                                print(numberOfPlayers)
+                                showingConfirmation = true
+                                self.presentationMode.wrappedValue.dismiss()
+                            } label: {
+                                Text("Checkout all players at \(location!.id)?")
+                            }
+                            .alert("You have successfully Checked-Out", isPresented: $showingConfirmation){
+                                Button("Ok", role: .cancel) {}
+                            }
+                            .padding()
+                        }
+                    }
+                    
                 }else{
                     Button("Check In"){
-                        mainViewModel.checkIn(playersCheckedIn: Int(self.numberOfPlayers) ?? -1)
-                        locationModel.checkInLocation(playerAmt: Int(self.numberOfPlayers) ?? -1)
+                        mainViewModel.checkIn(location: location!.id, playersCheckedIn: self.numberOfPlayers)
+                        locationModel.checkInAtLocation(playerAmt: self.numberOfPlayers, location: location!)
                     }
-                    TextField("Enter number of players...", text: $numberOfPlayers)
+                    TextField("Enter number of players...", value: $numberOfPlayers, formatter: NumberFormatter())
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.center)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
-                        .onReceive(Just(numberOfPlayers)) { newValue in
-                            let filtered = newValue.filter { "0123456789".contains($0) }
-                            if filtered != newValue {
-                                self.numberOfPlayers = filtered
-                            }
-                        }
+//                        .onReceive(Just(numberOfPlayers)) { newValue in
+//                            let filtered = newValue.filter { "0123456789".contains($0) }
+//                            if filtered != newValue {
+//                                self.numberOfPlayers = filtered
+//                            }
+//                        }
                 }
             } else{
                 Text("Error retrieving checked in status")
@@ -88,26 +109,26 @@ struct LocationDetailsView: View{
             
             Form{
                 Section{
-                    Text("\(locationModel.currLocation?.curr_players ?? -1)")
+                    Text("\(location?.curr_players ?? -1)")
                 }header: { Text("Players")}
                 Section{
-                    Text(locationModel.currLocation?.address ?? "Error")
+                    Text(location?.address ?? "Error")
                 }header: { Text("Address")}
                 Section{
-                    Text("\(locationModel.currLocation?.halfCourts ?? -1)")
+                    Text("\(location?.halfCourts ?? -1)")
                 }header: { Text("Half Courts")}
                 Section{
-                    Text(locationModel.currLocation?.rimType ?? "Error")
+                    Text(location?.rimType ?? "Error")
                 }header: { Text("Rim Type")}
                 
             }
         }
-        
+        .onDisappear {
+            locationModel.getLocations()
+        }
     }
 }
   
-
-
 struct Previews_LocationView_Previews: PreviewProvider {
     static var previews: some View {
         /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/

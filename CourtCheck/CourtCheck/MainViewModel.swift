@@ -10,6 +10,7 @@ import Firebase
 import FirebaseFirestore
 import SwiftUI
 import FirebaseStorage
+import simd
 
 class FirebaseManager: NSObject {
     
@@ -33,12 +34,14 @@ class FirebaseManager: NSObject {
 struct MainUser: Identifiable{
     var id: String {uid}
     var uid: String
+    var checkInLocation: String
     var email: String
     var checkedInPlayers: Int
     var isCheckedIn: Bool
 
     init(data: [String: Any]) {
         self.uid = data["uid"] as? String ?? ""
+        self.checkInLocation = data["checkInLocation"] as? String ?? ""
         self.email = data["email"] as? String ?? ""
         self.checkedInPlayers = data["checkedInPlayers"] as? Int ?? -1
         self.isCheckedIn = data["isCheckedIn"] as? Bool ?? false
@@ -94,9 +97,10 @@ class MainViewModel: ObservableObject{
     }
     
     // check in User
-    func checkIn(playersCheckedIn : Int){
+    func checkIn(location : String, playersCheckedIn : Int){
         //check in locally
         DispatchQueue.main.async {
+            self.mainUser?.checkInLocation = location
             self.mainUser?.checkedInPlayers = playersCheckedIn
             self.mainUser?.isCheckedIn = true
         }
@@ -106,7 +110,8 @@ class MainViewModel: ObservableObject{
         
         db.collection("Users").document(self.mainUser?.uid ?? "")
             .updateData([
-                "checkedInPlayers" : self.mainUser?.checkedInPlayers ?? -1,
+                "checkInLocation" : location,
+                "checkedInPlayers" : playersCheckedIn,
                 "isCheckedIn" : true]) {err in
                     if let err = err{
                         print("Error writing -> checkIn :\(err)")
@@ -117,7 +122,24 @@ class MainViewModel: ObservableObject{
     }
 
     func checkOut() {
-
+        //checkout locally
+        self.mainUser?.checkInLocation = ""
+        self.mainUser?.checkedInPlayers = 0
+        self.mainUser?.isCheckedIn = false
+        
+        //checkout Firebase
+        let db = Firestore.firestore()
+        db.collection("Users").document(self.mainUser!.uid)
+            .updateData([
+                "checkInLocation" : "",
+                "checkedInPlayers" : 0,
+                "isCheckedIn" : false]) { err in
+                    if let err = err{
+                        print("ERORR: Couldn't checkout Firebase :\(err)")
+                    } else{
+                        print("Sucessfully checked-out all players")
+                    }
+                }
     }
     
     func userSingOut() {

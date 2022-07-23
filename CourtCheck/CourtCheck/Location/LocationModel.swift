@@ -20,7 +20,8 @@ struct Location: Identifiable{
 class LocationModel: ObservableObject{
     @EnvironmentObject var mainViewModel : MainViewModel
     @Published var Locations = [Location]()
-    @Published var currLocation : Location?
+    
+    var checkoutLocation: Location?
     
     let db = Firestore.firestore()
     
@@ -40,15 +41,15 @@ class LocationModel: ObservableObject{
         }
     }
     /* check in # of players */
-    func checkInLocation(playerAmt : Int) {
+    func checkInAtLocation(playerAmt : Int, location: Location) {
         //check for existing value in 'currLocation'
-        guard (currLocation?.id) != nil else{
-            print("Location Not Found")
-            return
-        }
+//        guard (location.id) != nil else{
+//            print("Location Not Found")
+//            return
+//        }
         // Update in 'playerAmt' in at 'currLocation' in Firebase
-        let totalPlayersNow = currLocation!.curr_players + playerAmt
-        self.db.collection("Locations").document(currLocation!.id)
+        let totalPlayersNow = location.curr_players + playerAmt
+        self.db.collection("Locations").document(location.id)
             .updateData([
                 "players" : totalPlayersNow]) { err in
                     if let err = err{
@@ -57,6 +58,38 @@ class LocationModel: ObservableObject{
                         print("CheckInLocation Completed : \(playerAmt) Players added")
                     }
                 }
+    }
+    
+    func checkOutAtLocation(decrementPlayer: Int, location: Location) {
+        //find # of players at location
+//        db.collection("Locations").document(mainViewModel.mainUser!.checkInLocation)
+//            .getDocuments { snapshot, err in
+//                if err == nil{
+//                    if let snapshot = snapshot {
+//                        DispatchQueue.main.async {
+//                            self.checkoutLocation = snapshot.documents.map{d in
+//                                return
+//
+//                            }
+//                        }
+//                    }
+//                } else{
+//                    print("ERROR: checkOutAtLocation couldn't complete: \(err)")
+//                }
+//
+//
+//
+//            }
+    
+        // Decrement in Firebase
+        db.collection("Locations").document(location.id).updateData(["players" : FieldValue.increment(-Double(decrementPlayer))]) { [self] err in
+                if let err = err{
+                    print("ERROR: Failed to checkOutAtLocation: \(err)")
+                } else{
+                    print("Successfully checked-out \(decrementPlayer) Players at \(location.id)")
+                    //self.getLocations()
+                }
+        }
     }
     
 }
