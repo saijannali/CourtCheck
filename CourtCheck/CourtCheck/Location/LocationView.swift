@@ -113,6 +113,10 @@ struct LocationDetailsView: View{
                 }header: { Text("Players")}
                 Section{
                     Text(location?.address ?? "Error")
+                    Button("Google Maps"){
+                        locationModel.goToMaps()
+                    }
+
                 }header: { Text("Address")}
                 Section{
                     Text("\(location?.halfCourts ?? -1)")

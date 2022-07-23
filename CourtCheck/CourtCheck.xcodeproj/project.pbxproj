@@ -30,6 +30,7 @@
 		E52F952C2882044600E1C8D1 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		E52F952E2882088B00E1C8D1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		E549A449287FD5660089D798 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E56B6698288CAC3A0044B7CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E574B1C0287B544200D442C1 /* CourtCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CourtCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E574B1C3287B544200D442C1 /* CourtCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCheckApp.swift; sourceTree = "<group>"; };
 		E574B1C7287B544300D442C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		E574B1C2287B544200D442C1 /* CourtCheck */ = {
 			isa = PBXGroup;
 			children = (
+				E56B6698288CAC3A0044B7CF /* Info.plist */,
 				E574B1C3287B544200D442C1 /* CourtCheckApp.swift */,
 				E52F95272881FDC000E1C8D1 /* ContentView.swift */,
 				E52F952C2882044600E1C8D1 /* UserView.swift */,
@@ -329,6 +331,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CourtCheck/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CourtCheck/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -357,6 +360,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CourtCheck/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CourtCheck/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
